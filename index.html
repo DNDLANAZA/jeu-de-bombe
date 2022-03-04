@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Jeux de bombe</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-5">
+                <label for="label-control">Width:</label>
+                <input type="text" class="form-control" id="longueur" placeholder="0">
+            </div>
+            <div class="col-md-5">
+                </label for="label-control">Height:</label>
+                <input type="text" class="form-control" id="largeur" placeholder="0">
+            </div>
+            <div class="col-md-2 mt-4">
+                <button class="btn btn-primary w-100" id="creer">SET</button>
+            </div>
+        </div>
+
+        <div class="row d-flex align-content-start justify-content-start mt-5">
+            <section class="col-md-6">
+
+            </section>
+        </div>
+    </div>
+
+
+
+
+<script src="js/jquery-3.4.0.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#creer').click(function(){
+                L = document.getElementById('longueur').value;
+                l = document.getElementById('largeur').value;
+
+                // récupère une référence vers l'élément body
+                var body = document.getElementsByTagName("section")[0];
+
+                // création des éléments <table> et <tbody>
+                table = document.createElement("table");
+                table.classList.add("table", "noborder");
+                        table.classList.add('contenue');
+                table.id ="tableau";
+                tablebody = document.createElement("tbody");
+                k=1;
+
+                // création des cellules
+                for(var j = 1; j <= l; j++) {
+                    // création d'un élément <tr>
+                    row = document.createElement("tr");
+
+                    for(var i = 0; i < L; i++) {
+
+                        // création d'un élément <td>
+                        cell = document.createElement("td");
+                        // cell.classList.add("padding","0px");
+                        let text = document.createElement("div");
+                        // text.classList.add('contenue');
+                        let texte = document.createElement("img");
+
+                        if((k == j)&&(i % (k+1)==0)){
+                            function imageClick(texte){
+                                alert("bonjour");
+                            }
+                            // texte.src = "img/bombe.png";
+                            texte.classList.add('img-circle');
+                            texte.style.width = "50px";
+                            texte.style.height = "50px";
+
+                            // texte.style.objectFit ='cover';
+                            // texte.alt= ''+(i+1)+':'+(j)+'';
+                            var alt= ''+(i+1)+'-'+(j)+'';
+                            texte.setAttribute('src',"img/bombe.png");
+                            texte.setAttribute('alt',alt);
+                            texte.setAttribute('onclick',"alert(this.alt+' : Bombe')");
+                            let alttd=this.alt;
+                            cell.setAttribute('onclick',"alert(alttd)");
+                            // cell.setAttribute('onclick',"alert(alt+' : Bombe')");
+
+                            // sub=texte.alt;
+                            // texte.onclick=function(){alert(''+(i+1)+':'+(j)+'')};
+                          //  texte.style.background=color="blue";
+                            // text.appendChild(texte);
+                            cell.append(texte);
+                            row.appendChild(cell);
+                        }else{
+
+                            cell.append(text);
+                            row.appendChild(cell);
+                        }
+
+                        // ajoute la cellule <td> à la ligne <tr>
+
+                    }k=k+1;
+                    // ajoute la ligne <tr> à l'élément <tbody>
+                    tablebody.appendChild(row);
+                }
+                // ajoute <tbody> à l'élément <table>
+                table.appendChild(tablebody);
+                // ajoute <table> à l'élément <body>
+                body.appendChild(table);
+                // définit l'attribut border de table à 2;
+                // table.setAttribute("border", "1");
+
+                    var tables = document.getElementById('tableau');
+                    var rows =tables.rows;
+                    // for(var i=0; i=rows.length; i++){
+                    //     rows[i].click = function(){
+                    //         return function(){
+                    //             alert("salut");
+                    //         }
+                    //     }
+                    // }
+                var tbl = document.getElementsByTagName("table")[0];
+                var cls = tbl.getElementsByTagName("td");
+                var image =document.getElementsByTagName("img")[0].alt;
+                  for(var n=0; n<cls.length; n++){
+                    cls[n].style.padding="0";
+                  }
+                // // var cls = tbl.getElementById("contient");
+                // function affiche(e){
+                //     let img=e.target;
+                //     result=img.src;
+                //     console.log(img);
+                // }
+
+                function alertRowCell(e){
+                    var cell = e.target || window.event.srcElement;
+                    // var img = e.target || window.event.srcElement;
+                        if(cell.cellIndex == null && cell.parentNode.rowIndex == null){
+                            // alert( (cell.cellIndex+1) + '-' + (cell.parentNode.rowIndex+1)+':'+' Vous avez touché la bombe' );
+                            // alert("Vous avez touché la bombe");
+                        }else{
+                            alert( (cell.cellIndex+1) + '-' + (cell.parentNode.rowIndex+1)+':'+' No Bombe' );
+                        }                        //
+                        // alert( (cell.cellIndex+1) + '-' + (cell.parentNode.rowIndex+1)+':'+' No Bombe' );
+
+                    }
+
+                for ( var i = 0; i < cls.length; i++ ) {
+                    if ( cls[i].addEventListener ) {
+                        cls[i].addEventListener("click", alertRowCell, false);
+                    } else if ( cls[i].attachEvent ) {
+                        cls[i].attachEvent("onclick", alertRowCell);
+                    }
+                }
+            })
+         })
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

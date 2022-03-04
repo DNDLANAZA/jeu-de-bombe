@@ -1,0 +1,70 @@
+<head>
+<title>Test</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-5">
+                <label for="label-control">Width:</label>
+                <input type="text" class="form-control" id="longueur" placeholder="0">
+            </div>
+            <div class="col-md-5">
+                </label for="label-control">Height:</label>
+                <input type="text" class="form-control" id="largeur" placeholder="0">
+            </div>
+            <div class="col-md-2 mt-4">
+                <button class="btn btn-primary w-100" id="creer">SET</button>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12" id="contenant">
+
+            </div>
+        </div>
+    </div>
+
+
+<script src="js/jquery-3.4.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#creer').click(function(){
+        // récupère une référence vers l'élément body
+        var body = document.getElementsByTagName("body")[0];
+
+        // création des éléments <table> et <tbody>
+        table     = document.createElement("table");
+        tablebody = document.createElement("tbody");
+                L = document.getElementById('longueur').value;
+                l = document.getElementById('largeur').value;
+        // création des cellules
+        for(var j = 0; j < L; j++) {
+            // création d'un élément <tr>
+            row = document.createElement("tr");
+
+            for(var i = 0; i < l; i++) {
+                // création d'un élément <td>
+                cell = document.createElement("td");
+                // création d'un nœud texte
+                // texte = document.createTextNode("la cellule est ligne " + j + ", colonne " + i);
+                texte = document.createElement("div").style.backgroundColor ="0";
+                // ajoute le nœud texte créé à la cellule <td>
+                cell.append(texte);
+                // ajoute la cellule <td> à la ligne <tr>
+                row.appendChild(cell);
+            }
+            // ajoute la ligne <tr> à l'élément <tbody>
+            tablebody.appendChild(row);
+        }
+
+        // ajoute <tbody> à l'élément <table>
+        table.appendChild(tablebody);
+        // ajoute <table> à l'élément <body>
+        body.appendChild(table);
+        // définit l'attribut border de table à 2;
+        table.setAttribute("border", "2");
+    })
+})
+</script>
+</body>
+</html>
